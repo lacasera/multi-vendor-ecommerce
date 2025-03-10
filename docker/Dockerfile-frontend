@@ -1,0 +1,27 @@
+FROM node:22-alpine
+
+LABEL maintainer="William Agyenim"
+
+WORKDIR /var/www/html
+
+ENV TZ=UTC
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH=$PATH:/home/node/.npm-global/bin
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apk update && apk add --no-cache bash git
+
+# change default shell from ash to bash
+RUN sed -i -e "s/bin\/ash/bin\/bash/" /etc/passwd
+ENV LC_ALL=en_US.UTF-8
+
+# Project Setup
+COPY --chown=node:node ./helpers/start-frontend.sh /usr/local/bin/start-frontend.sh
+RUN chmod +x /usr/local/bin/start-frontend.sh
+RUN chown -R node:node /var/www/html
+
+USER node
+
+EXPOSE 5173
+
+ENTRYPOINT ["start-frontend.sh"]
