@@ -7,6 +7,8 @@
 3. run `make setup` to build containers
 4. visit `http://127.0.0.1`
 
+#### Access the deployed application here http://134.209.88.201/
+
 ### NOTE
 A secret key a sensitive as a stripe payment key would never be committed to github. 
 but for demo purposes and easy setup, I added a sample stripe secret key in the repo
