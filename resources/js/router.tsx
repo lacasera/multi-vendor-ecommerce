@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Rigester";
 import MyAccount from "./pages/MyAccount";
 import CheckoutVerify from "./pages/CheckoutVerify";
+import Loader from "./components/Loader";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -21,7 +22,7 @@ const router = createBrowserRouter(
             <Route
                 path="/login"
                 element={
-                    <React.Suspense >
+                    <React.Suspense fallback={<Loader />}>
                         <Login />
                     </React.Suspense>
                 }
@@ -30,7 +31,7 @@ const router = createBrowserRouter(
             <Route
                 path="/sign-up"
                 element={
-                    <React.Suspense >
+                    <React.Suspense fallback={<Loader />}>
                         <Register />
                     </React.Suspense>
                 }
@@ -39,7 +40,7 @@ const router = createBrowserRouter(
             <Route
                 path="/checkout"
                 element={
-                    <React.Suspense >
+                    <React.Suspense fallback={<Loader />}>
                         <Checkout />
                     </React.Suspense>
                 }
@@ -48,7 +49,7 @@ const router = createBrowserRouter(
             <Route
                 path="/verify/:checkout_code"
                 element={
-                    <React.Suspense >
+                    <React.Suspense fallback={<Loader />}>
                         <CheckoutVerify />
                     </React.Suspense>
                 }
@@ -57,15 +58,14 @@ const router = createBrowserRouter(
             <Route
                 path="/my-account"
                 element={
-                    <React.Suspense >
+                    <React.Suspense fallback={<Loader />}>
                         <MyAccount />
                     </React.Suspense>
                 }
             />
-            <Route
-                path="*"
-                element={<NotFound />}
-            />
+
+            <Route path="*" element={<NotFound />} />
+
         </Route>
     )
 );

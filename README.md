@@ -1,6 +1,6 @@
 # Workwize Store
 
-### Setup Instructions
+### Local Setup Instructions
 1. clone repository
 2. change `APP_PORT` to desired port (optional, defaults to `80`)
 2. copy `.env.docker` into `.env` by running `cp .env.docker .env`
@@ -34,7 +34,8 @@ but for demo purposes and easy setup, I added a sample stripe secret key in the 
 
 ### Architectural Overview
 
-When suppliers create products, users can view and purchase products from multiple suppliers. During checkout, the system ensures a structured tracking mechanism for orders and payments using the following entities:
+When suppliers create products, users can view and purchase products from multiple suppliers.
+During checkout, the system ensures a structured tracking mechanism for orders and payments using the following entities:
 - `Checkout`: Represents the overall user’s order and tracks payment status.
 - `Order`: Tracks supplier-specific products purchased by a user. Since a checkout can contain products from multiple suppliers, separate orders are created for each supplier.
 - `OrderItem`: Represents the specific products purchased within an order.
@@ -46,9 +47,6 @@ When suppliers create products, users can view and purchase products from multip
 #### User Checkout Flow
 
 #### During checkout:
-1.	A Checkout entry is created to represent the user’s order. This stores payment-related information.
-2.	Orders are created for each supplier whose products are in the user’s cart. This allows suppliers to track and manage their specific orders.
-3.	Order Items are created to represent individual products purchased in an order.
 
 #### When a checkout is created:
 1.	The product quantity is deducted from stock to prevent overselling. 
@@ -56,9 +54,9 @@ When suppliers create products, users can view and purchase products from multip
 3.	If payment fails, the checkout and orders are marked as failed, and the previously deducted product quantities are restored.
 
 ### NOTE
-1. To guard against `RACE CONDITIONS` on product being out of stock but item is placed, a pessimistic lock is placed on the product row within a database transaction.
+1. To guard against `RACE CONDITIONS` on product being out of stock but item is placed, a `pessimistic lock` is placed on the product row within a database transaction.
 2. In an ideal scenario, relying on `Stripe’s webhook notification system` for payment confirmation would have been preferable for a more robust system. 
-This approach would allow us to use a `job/worker` that automatically releases withheld product quantities after a specified period if payments are not confirmed within that timeframe.
+This approach would allow us to have a `job/worker` that automatically releases withheld product quantities after a specified period if payments are not confirmed within that timeframe.
 
 ### Shortcuts Taken Due to Time Constraints
 
@@ -68,4 +66,5 @@ To meet the time constraints, the following shortcuts were taken:
 3.	Product Filtering & Pagination: The backend API supports filtering and pagination, but it was not integrated into the frontend due to time constraints.
 4.	Checkout Shipping & Delivery Info: The frontend includes a form for collecting user details during checkout, but the data is not stored since this is a demo app.
 5.	Product Variations: A fully-fledged e-commerce application would need a variations table to store different versions of the same product. This was omitted due to time limitations.
-
+6.  Order Item details are not displayed on the frontend due to time.
+7. 
