@@ -3,15 +3,12 @@
 ### Local Setup Instructions
 1. clone repository
 2. change `APP_PORT` to desired port (optional, defaults to `80`)
-2. copy `.env.docker` into `.env` by running `cp .env.docker .env`
-3. run `make setup` to build containers
-4. visit `http://localhost`
+3. copy `.env.docker` into `.env` by running `cp .env.docker .env`
+4. add  a `STRIPE_SECRET_KEY=` to the env
+5. run `make setup` to build containers
+6. visit `http://localhost`
 
 #### Access the deployed application here http://134.209.88.201/
-
-### NOTE
-A secret key a sensitive as a stripe payment key would never be committed to github. 
-but for demo purposes and easy setup, I added a sample stripe secret key in the repo
 
 
 ### Features
