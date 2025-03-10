@@ -5,7 +5,7 @@
 2. change `APP_PORT` to desired port (optional, defaults to `80`)
 2. copy `.env.docker` into `.env` by running `cp .env.docker .env`
 3. run `make setup` to build containers
-4. visit `http://127.0.0.1`
+4. visit `http://localhost`
 
 #### Access the deployed application here http://134.209.88.201/
 

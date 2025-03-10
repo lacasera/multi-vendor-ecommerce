@@ -21,23 +21,21 @@ class ImagesRelationManager extends RelationManager
             ->schema([
                 FileUpload::make('url')
                     ->columnSpanFull()
-                    ->multiple()
                     ->image()
-                    ->maxFiles(5)
                     ->maxSize(2048)
                     ->disk('public')
                     ->directory('product-images')
                     //->preserveFilenames()
-                    ->afterStateUpdated(function ($state, $set, $get) {
-                        if (is_array($state)) {
-                            foreach ($state as $path) {
-                                $this->getOwnerRecord()->images()->create([
-                                    'url' => $path
-                                ]);
-                            }
-                        }
-                        $set('url', null);
-                    })
+                    // ->afterStateUpdated(function ($state, $set, $get) {
+                    //     if (is_array($state)) {
+                    //         foreach ($state as $path) {
+                    //             $this->getOwnerRecord()->images()->create([
+                    //                 'url' => $path
+                    //             ]);
+                    //         }
+                    //     }
+                    //     $set('url', null);
+                    // })
             ]);
     }
 

@@ -8,9 +8,8 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -33,25 +32,17 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('sku')->required(),
                 Forms\Components\TextInput::make('quantity')->required(),
                 RichEditor::make('description')->columnSpanFull(),
-                MultiSelect::make('categories')
+                Select::make('categories')
                     ->relationship('categories', 'name')
-                    ->preload() // Loads options in advance
-                    ->required(),
-
-                MultiSelect::make('attributes')
-                    ->relationship('attributes', 'name')
+                    ->multiple()
                     ->preload()
                     ->required(),
 
-                FileUpload::make('images')
-                    ->columnSpanFull()
+                Select::make('attributes')
+                    ->relationship('attributes', 'name')
                     ->multiple()
-                    ->image()
-                    ->maxFiles(5)
-                    ->maxSize(2048)
-                    ->disk('public')
-                    ->directory('product-images')
-                    ->preserveFilenames(),
+                    ->preload()
+                    ->required(),
             ]);
     }
 

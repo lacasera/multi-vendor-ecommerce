@@ -22,6 +22,7 @@ class ProductController extends Controller
                 PriceFilter::class,
             ])
             ->thenReturn()
+            ->orderBy('id', 'desc')
             ->paginate(
                 $request->input('perPage', 15)
             );
