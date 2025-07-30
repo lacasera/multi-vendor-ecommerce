@@ -1,4 +1,4 @@
-# Workwize Store
+#  Laravel Multi Vendor Store with Filament and React
 
 ### Local Setup Instructions
 1. clone repository
@@ -6,10 +6,7 @@
 3. copy `.env.docker` into `.env` by running `cp .env.docker .env`
 4. add  a `STRIPE_SECRET_KEY=` to the env
 5. run `make setup` to build containers
-6. visit `http://localhost`
-
-#### Access the deployed application here http://134.209.88.201/
-
+6. visit `http://localhost:{APP_PORT}`
 
 ### Features
 
@@ -66,4 +63,3 @@ To meet the time constraints, the following shortcuts were taken:
 4.	Checkout Shipping & Delivery Info: The frontend includes a form for collecting user details during checkout, but the data is not stored since this is a demo app.
 5.	Product Variations: A fully-fledged e-commerce application would need a variations table to store different versions of the same product. This was omitted due to time limitations.
 6.  Order Item details are not displayed on the frontend due to time.
-7. 
